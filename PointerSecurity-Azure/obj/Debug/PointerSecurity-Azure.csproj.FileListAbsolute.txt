@@ -1,0 +1,9 @@
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\PointerSecurity-Azure.dll.config
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\PointerSecurity-Azure.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\PointerSecurity-Azure.pdb
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\EntityFramework.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\EntityFramework.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\obj\Debug\PointerSecurity-Azure.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurity-Azure\obj\Debug\PointerSecurity-Azure.pdb

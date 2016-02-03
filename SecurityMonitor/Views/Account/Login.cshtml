@@ -1,0 +1,65 @@
+﻿@using SecurityMonitor.Models
+@model LoginViewModel
+
+
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 100px; margin-bottom:200px;" >
+
+
+
+
+        <section style="margin:50px 0 50px 0;">
+            <!--vCard starts-->
+            <div class=" col-md-4 col-lg-4 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+
+            </div>
+            <div class=" col-md-4 col-lg-4  paddingbottom20px nopadding">
+                <!--header starts-->
+                <section class=" col-md-12 text-center clientboxrow ">
+                    <section class=" boxheadHome-login  col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding">
+                        <div class=" boxnameHome col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <section id="loginForm">
+                                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="col-md-12  ">
+
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control logintile", Placeholder = "UserName" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control logintile", Placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <input type="submit" value="Log in" class="btn btn-default form-control" style="margin-left:5px;" />
+                                        </div>
+                                    </div>
+
+                                }
+                            </section>
+                        </div>
+                    </section>
+                </section>
+            </div>
+
+        </section>
+       
+    </div>
+    @*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

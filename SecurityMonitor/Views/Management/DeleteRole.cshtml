@@ -1,0 +1,70 @@
+﻿@model SecurityMonitor.Models.DisplayManagerRoleDelete
+           @using Doormandondemand;
+
+
+
+@{
+    ViewBag.Title = "DeleteRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row roldedeleteheading ">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+        Role Name: @Html.DisplayFor(model => model.MyRoles.Name)
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
+        Building
+    </div>
+</div>
+
+
+<div class="row roldedeleteheading lightdarkblue">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
+        Relationship
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+    </div>
+</div>
+
+   @{List<Buildings>buildings = (List<Buildings>)ViewBag.Buildings; }
+@if ((List<Manager>)ViewBag.Managers != null)
+{
+    var i = 0;
+    foreach (var item in buildings)
+    {
+     
+        <div class="row roldedelete hollow3">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 pull-left">
+               First Name @item.ManagerBuilding.FirstOrDefault().Manager.FirstName
+                 <br />Last Name: @item.ManagerBuilding.FirstOrDefault().Manager.LastName 
+                <br /> Phone @item.ManagerBuilding.FirstOrDefault().Manager.Phone
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-4">
+                @using (Html.BeginForm(new { RoleName = @Model.MyRoles.Name }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color text-center">
+
+                        <span class="glyphicon glyphicon-user"></span>
+                        <input type="submit" value="detach" class="btn btn-link" />
+                        <span class="glyphicon glyphicon-home"></span>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right">
+               Building: @item.BuildingName 
+                <br/>Address: @item.Address
+                <br/>State: @item.State
+                @{i=i+1;}
+</div>
+        </div>
+    }
+}

@@ -1,0 +1,1867 @@
+﻿@model SecurityMonitor.Models.RepairManagement
+
+@{
+    ViewBag.Title = "RepairManagement";
+    Layout = "~/Views/Shared/_LayoutTenant .cshtml";
+}
+
+@{
+    List<SelectListItem> items = new List<SelectListItem>();
+    items.Add(new SelectListItem { Text = "Assign to New", Value = "1" });
+
+}
+
+<!--nAV bAR-->
+<div class="row">
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 headerDefault">
+        <ol class="breadcrumb" style="line-height:20px;" id="clientbreadcrumbid">
+            <li>@Html.ActionLink("Home", "index", "Home", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Page", "ClientHome", "building", null, new { @class = "breadcrumblink" })</li>
+            <li>@Html.ActionLink("Client's Profile", "ClientProfile", "building", new { ClientID = @Model.building.ClientID }, new { @class = "breadcrumblink" })</li>
+            <li> @Html.ActionLink((string)@Model.building.BuildingName, "BuildingProfile", "building", new { buildingID = @Model.building.ID }, new { @class = "breadcrumblink" })</li>
+            <li>Repair Management</li>
+        </ol>
+    </div>
+</div>
+<div class="row ">
+
+    <div class="box">
+        <div class="container-4 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Search, valueUpdate:'afterkeydown'" />
+            <br />
+            <hr />
+            <br />
+        </div>
+       
+    </div>
+</div>
+
+<div class="row contentSquareRepairrquests">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <button type="button" class="btn btn-link pull-right" data-toggle="modal" data-target="#ClosedTickets" data-bind="click:loadclosedTickets">View Closed Ticket</button>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding sorttitles  ">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 hvr-underline-reveal " id="dateidtitle"  data-bind="click:RROrderByDate">
+                Sort By
+            </div>
+
+            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1 hvr-underline-reveal  " id="Statusidtitle" data-bind="click:RRLoadRequestSortStatusASC">
+                Sort By
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  hvr-underline-reveal" id="Urgencyidtitle" data-bind="click:RRLoadRequestSortUrgencyASC">
+                Sort By
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   hvr-underline-reveal" id="Requestidtitle" data-bind="click:RRLoadRequestSortRequestNumberASC">
+                Sort By
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  "  data-bind="">
+               
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
+           
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementHeaderrows  ">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 hvr-underline-reveal " id="dateid" style="border-right:1px solid #808080;" data-bind="click:RROrderByDate">
+                Date
+            </div>
+
+            <div class="col-lg-1 col-md-112 col-sm-1 col-xs-1 hvr-underline-reveal " id="Statusid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortStatusASC">
+                Status
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  hvr-underline-reveal" id="Urgencyid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortUrgencyASC">
+                Urgency
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2   hvr-underline-reveal" id="Requestid" style="border-right:1px solid #808080;" data-bind="click:RRLoadRequestSortRequestNumberASC">
+                Request#
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " style="border-right:1px solid #808080;" data-bind="">
+                Problem Description
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  ">
+                AssignTo
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--this are the rows-->
+<div class="row contentSquareRepairrquests" data-bind="foreach:RepairRequest ">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 requestmanagementrows hollow5 hvr-underline-from-center " data-toggle="modal" data-target="#myModal" data-bind="click:selectedRequest">
+
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1   " data-bind="text:RequestedDate">
+
+            </div>
+
+
+
+            <div class="col-lg-1 col-md-12 col-sm-1 col-xs-1  " data-bind="text:Status">
+
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1  " data-bind="text:Urgency">
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  " data-bind="text:RequestNumber">
+
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 repairmanagementdescription  " data-bind="text:Description">
+
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  nopadding" data-bind="if:AssignedFullName">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="text:AssignedFullName"></div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2  nopadding" data-bind="if:ContractorFullName">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="text:ContractorFullName"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* self.RepairRequest.push({
+    RequestedDate: ko.observable(RDate),
+    Assignto: ko.observableArray(items),
+    Description: TrkPkgs[i].Description,
+    ID: TrkPkgs[i].ID,
+    Status: TrkPkgs[i].Status,
+    RequestNumber: TrkPkgs[i].RequestNumber,
+    Category: TrkPkgs[i].Category,
+    PhotoUrl: TrkPkgs[i].PhotoUrl,
+    Urgency: TrkPkgs[i].Urgency,
+    CName: TrkPkgs[i].CName,
+    CEmail: TrkPkgs[i].CEmail,
+    CPhone: TrkPkgs[i].CPhone,
+    PName: TrkPkgs[i].PName,
+    PEmail: TrkPkgs[i].PEmail,
+    PPhone: TrkPkgs[i].PPhone,
+    AssignToID: TrkPkgs[i].AssignToID,
+    AssignedFullName: TrkPkgs[i].AssignedFullName *@
+
+
+
+<!--Request Form-->
+<div class="modal fade " id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class=" noppading">
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                      Repair Request Details
+                    </h6>
+
+
+                    <span ></span>
+                    <div id="dropcomplete"  onclick="location.href = '#dropcomplete'">
+                        <span class="hvr-buzz-out"> Close this ticket</span>
+                        <div>
+
+                            <div><textarea class="form-control ticketresolution" id="writebeforeclose" placeholder="Enter a resolution (required)" data-bind="value:ClosingMessage"></textarea> </div>
+                            <div>Are you sure ?</div>
+                            <button class="btn btn-info" data-bind="click: CompleteAssignment" data-dismiss="modal"  id="closingrequest">Close ticket</button>
+                            <a href="#noselection"  id="cancelcolsingticket"  >Cancel</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body lightgrey">
+                <div class="col-lg-6 col-md-6  RPRInformationbox ">
+                   <div class="displayinline">Category: </div> <div class="displayinline" data-bind="text:selectedCategory"></div>
+                    <br/>
+                    <div class="displayinline">Priority: </div> <div class="displayinline" data-bind="text:selectedUrgency"></div>
+                    <br/>
+                    <div class="displayinline">Status: </div> <div class="displayinline" data-bind="text:selectedStatus"></div>
+                    <br/>
+                    <div class="displayinline">Issued On: </div> <div class="displayinline" data-bind="text:selectedRequestDate"></div>
+                    
+                   
+                   
+                  
+                </div>
+              
+                <div class="col-lg-6 col-md-6  RPRInformationbox">
+
+                    <div class="displayinline">Person to Contact: </div> <div class="displayinline" data-bind="text:selectedPName"></div>
+                    <br/>
+                    <div class="displayinline">Email: </div>  <div class="displayinline" data-bind=" text:selectedPEmail"></div>
+                    <br/>
+                    <div class="displayinline">Tel: </div> <div class="displayinline" data-bind="text:selectedPPhone"></div>
+
+                    <div data-bind="text:selectedCName"></div>
+                    <div data-bind="text:selectedCEmail"></div>
+                    <div data-bind="text:selectedCphone"></div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="assignedbox" id="handlerid" style="display:none;">
+                        <div class="displayinline handlerclass"> Handler: </div>
+                        <div class="displayinline handlerclass" data-bind="text:ContactName"></div>
+                        <span><button type="button" class="btn btn-link handlerclass" style=" color:white;" onclick="location.href = '#assignedbox'" data-bind="    click: removelink, visible: isvisible"> Remove</button></span>
+                        <span> <button type="button" class="btn btn-link handlerclass hvr-buzz-out " style=" color:white;" data-bind="click:isnotevisibleclick, visible:isvisible "> Add Notes</button></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="">Problem: </div> 
+                    <div class="displayinline" data-bind="text:selectedDescription"></div>
+                    <span><span data-toggle="modal" data-target="#popupnotehistory" id="notebutton" class="btn btn-link pull-right"  data-bind="attr:{'data-mycount':Technotecount}"><span id="tenotebutton">Notes</span></span></span> 
+               
+                <div ></div>
+                 </div>
+                   
+
+                    <div class="boxnotes col-lg-12 col-md-12 col-sm-12 col-xs-12  " data-bind="visible:isvisible, visible:isnotevisible">
+                        <span id="labeladditionalinfo">Please share adition information with this request. </span>
+                        <textarea type="text" class="form-control" data-bind="value:UpdateNotes" id="requestNotes"></textarea>
+                        <span class="pull-right"><button type="button" class="btn btn-link" data-bind="click:removeNotelink,">Remove Notes</button></span>
+
+                    </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainboxtabs ">
+
+
+                    <div class="col-lg-12 col-md-12" id="outertabs">
+                        <ul class="nav nav-tabs" id="tabs">
+                            <li role="presentation" class="active"><a href="#SBS" data-toggle="tab" data-bind="click:displayStaff">Select Building Staff</a></li>
+                            <li role="presentation"><a href="#SC" data-toggle="tab">Select Contractor</a></li>
+                            <li role="presentation"><a href="#NewContact" data-toggle="tab">Add New Contractor</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="SBS">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                    Select Building Staff
+
+                                </div>
+
+
+                                <span class="textid">Menu</span>
+
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="foreach:BSArray">
+
+                                    <section style="margin:5px 0 5px 0;">
+                                        <!--vCard starts-->
+                                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                                            <!--header starts-->
+                                            <section class=" col-md-12 text-center clientboxrow ">
+                                                <section class="hvr-underline-from-left  boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding ">
+                                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 assignstaffbox ">
+
+                                                            <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3  sbsrows_inside_right " data-bind="click:assigntofunction">
+                                                                    <button style="min-height:20px;" type="button" class="btn btn-primary" onclick="location.href = '#handlerid'">assign</button>
+
+                                                                </div>
+                                                                <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 text-left assignstaffsettings ">
+                                                                    Name: <span class=" sbs_font" data-bind="text:FullName"></span>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div class="fa fa-th-large fa-4x buildingstaffmenue" data-bind="click:staffminimenu"></div>
+
+
+
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </section>
+                                        </div>
+                                    </section>
+
+                                    @*<div class="sbsrows">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 sbsrows_inside_left ">
+
+                                    <span class="SBS_Font" data-bind="text:FullName"></span>
+                                    <span class="SBS_Font" data-bind="text:Tel" style="margin-left:20px;"></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 sbsrows_inside_left ">
+                                    <select class=" form-control displayinline dopdownvia" data-bind="options:ViaDropDown,  optionsText:'Name',optionsValue:'value', event:{change:  onChange}"></select>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 sbsrows_inside_right " data-bind="click:assigntofunction">
+                                    <button type="button" class="btn btn-primary">assign</button>
+                                </div>
+                            </div>*@
+                                </div>
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="SC">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                    Select Contractor
+
+                                </div>
+                                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:DisplayAllContractor ">
+
+                                    <section style="margin:5px 0 5px 0;">
+                                        <!--vCard starts-->
+                                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                                            <!--header starts-->
+                                            <section class=" col-md-12 text-center clientboxrow  " onclick="location.href = '#handlerid'" data-bind="click:assignCompany">
+                                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-from-left">
+                                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                                        <!--logo-->
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  ">
+                                                            <h4><span class=" ContratorRowContentHeader col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="text:CompanyName"></span></h4>
+                                                        </div>
+                                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding  boxinnerboxSCBuilding fa fa-building fa-5x" id="contractorbuildingid">
+
+                                                        </div>
+                                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  boxinnerboxSC">
+
+                                                            <span data-bind="text:Phone" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                                            <span data-bind="text:Category" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                                            <span data-bind="text:Email" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                </section>
+                                            </section>
+                                        </div>
+                                    </section>
+
+
+
+                                    @*<div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" >
+
+
+                            </div>*@
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="tab-pane fade" id="NewContact">
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 " style="margin:20px 0;">
+                                    New Contractor
+
+                                </div>
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><select class="form-control input-sm" data-bind="options:CompanyCat, value:NewCatName"></select></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="email" placeholder="Company Email/UserName" class="form-control input-sm" data-bind="value:NewEmail" /></span>
+                                    <div id="validateemailid"></div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Name" class="form-control input-sm" data-bind="value:NewCompanyName" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Address" class="form-control input-sm" data-bind="value:NewAddress" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company City" class="form-control input-sm" data-bind="value:NewCity" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><select type="text" placeholder="Company State" class="form-control input-sm" data-bind="options:ListStates,  value:NewState"></select></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Zipcode" class="form-control input-sm" data-bind="value:NewZipcode" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" placeholder="Company Main Phone" class="form-control input-sm" data-bind="value:NewMainPhone" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" class="form-control input-sm" placeholder="Primary to Contact" data-bind="value:NewPName" /></span>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 formcontractors">
+                                    <span><input type="text" class="form-control input-sm" placeholder="Primary Number" data-bind="value:NewPPhone" /></span>
+                                </div>
+                                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                <div class="col-lg-3 col-md-3 col-sm-12 col-sx-12 nopadding autogenaratedpwdrepair">
+
+                    <span>
+                        <input type="checkbox" id="ossm" name="ossm" class=" displayinline" data-bind="checked:NewPassword">
+                        <label class=" displayinline" for="ossm">Generated Pwd:</label>
+
+                    </span>
+                </div>
+
+            </div>*@
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <span><button type="button" class="btn btn-link">Add Comments</button> </span>
+                                    <span><textarea class="form-control" style="min-width:100%;" data-bind="value:NewComments"></textarea></span>
+                                    <button type="button" class="btn btn-link pull-right">Don't Add Comments</button>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <button type="button" class="btn btn-default" id="form-contracor" data-bind="click:InsertContractor">Save New Contractor</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!--Form-->
+                    <div class="col-lg-12 col-md-12 blueDefault" data-bind="foreach:buildingUsers">
+                        <div data-bind="text:BuildingUserName">
+                        </div>
+                    </div>
+                </div>
+            <div class="modal-footer noppading ">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 footerrepairpopup" data-bind="visible:cancelapply">
+                    <button id="cancelid" type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Cancel</button>
+                    <button class="btn btn-info " type="button" data-dismiss="modal" data-bind="click:ApplyUpdate">Apply Update</button>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*
+    Tech Note history Popup
+*@
+
+<div class="modal fade" id="popupnotehistory" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="">
+
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        Additional Notes
+                    </h6>
+                    
+                </div>
+              
+            </div>
+            <div class="modal-body lightgrey">
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="min-height:50px; padding:10px;">
+                   <div class="addingNotesettings">
+                       <button class="btn btn-default input-sm" data-bind="click:AddTechNote">Add Tech Note</button>
+                   </div>
+               </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 textareatouterbox" data-bind="visible:technotetextarea">
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 textareatinnerbox ">
+                        <textarea id="textareatechnote" class="form-control" data-bind="value:TechNoteValue, valueUpdate:'afterkeydown'" maxlength="255"></textarea>
+                        <span id="remainingChar">0</span>
+                        <button class="btn btn-info pull-right" type="button" data-bind="click:InsertTechNote">Insert</button>
+                        <button class="btn btn-link pull-right" data-bind="click:CloseTechNote">Don't Add Note</button>
+                    </div>   
+                 </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 "style="border:1px solid #eeeeee;" data-bind="foreach:technotes">
+                        <section style="margin:5px 0 5px 0;">
+                            <!--vCard starts-->
+                            <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                           
+                                <!--header starts-->
+                                <section class=" col-md-12 text-center clientboxrow ">
+                                    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding ContratorRowContentHeader margintop clicktoshoworhide " data-bind="attr:{'data-thisisakey':id}" style="min-height:20px; ">
+                                        <div class=" col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest   ">Tech's Note</div>
+                                        <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6  buildingstaffsettinsrepairrequest  " data-bind="text:CreatedDate">Tech's Note</div>
+                                        <span class="fa fa-thumb-tack fa-2x mypin"></span>
+                                    </div> 
+                                    <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-reveal sectiontoshoworhide" data-bind="attr:{'data-dropdownkey':id }">
+                                        <div class=" boxname settingfornote col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                            <textarea class="form-control" readonly="readonly" data-bind="text:Notes" style="min-height:100px; min-width:100%;"></textarea>
+                                            <button class=" input-sm btn btn-info" data-bind="click:DeleteTechNote"> 
+                                                Delete Note
+                                            </button>
+                                        </div>
+                                    </section>
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+                    </div>
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--view closewd tickets-->
+
+<div class="modal fade" id="ClosedTickets" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="">
+
+                <div class="col-lg-12 colmd-12  repairrequestformheader text-center ">
+                    <h6 class="modal-title myModalLabel " style="color:white; ">
+                        Closed Repair Requests
+                    </h6>
+
+                </div>
+
+            </div>
+            <div class="modal-body lightgrey">
+
+                <div class="row ">
+                    <div class="">
+                        <div class="container-5 col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <input type="search" id="search" class=" form-control input-xs" placeholder="Start Typing..." data-bind="value:Searchclosedrequest, valueUpdate:'afterkeydown'" />
+                            <br />
+                            <hr />
+                            <br />
+                        </div>
+
+                    </div>
+                </div>
+                
+                <div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 " data-bind="foreach:CloseTickets ">
+
+                    <section style="margin:5px 0 5px 0;">
+                        <!--vCard starts-->
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12  paddingBottom20px nopadding">
+                            <!--header starts-->
+                            <section class=" col-md-12 text-center clientboxrow  " @*onclick="location.href = '#handlerid'" data-bind="click:assignCompany"*@>
+                                <section class=" boxheadassign hollow5 col-md-12 col-lg-12 col-sm-12 col-xs-12 nopadding hvr-underline-from-left">
+                                    <div class=" boxname col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                                        <!--logo-->
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding  ">
+                                            <h4><span class=" ContratorRowContentHeader col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" data-bind="text:PEmail"></span></h4>
+                                        </div>
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 nopadding  boxinnerboxSCBuilding fa fa-building fa-5x" id="contractorbuildingid">
+
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10  boxinnerboxSC">
+
+                                            <span data-bind="text:CName" class="ContratorRowContent col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3">Category:</span> <span data-bind="text:Category" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
+                                            <span class="ContratorRowContent col-lg-3 col-md-3 col-sm-3 col-xs-3"> Request#:</span> <span data-bind="text:RequestNumber" class="ContratorRowContent col-lg-9 col-md-9 col-sm-9 col-xs-9 nopadding"></span>
+                                            <button type="button" class="btn btn-link" data-bind="click:ReopenRepairTicket">Re-Open Ticket</button>
+
+
+
+                                    </div>
+                                </section>
+                            </section>
+                        </div>
+                    </section>
+
+
+
+                    @*<div class="col-lg-12 cl-md-12 col-sm-12 col-xs-12 contractorRow hollow5" >
+
+
+            </div>*@
+                </div>
+              
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal" data-bind="click:removelink">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts
+{
+<link href="~/Content/hover.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-2.1.3.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/TheLibrary/TimeJS.js"></script>
+    <script type="text/javascript">
+
+
+
+
+    $(function () {
+
+        $('#dateid').mouseover(function(){ $('#dateidtitle').css("Opacity","100"); }).mouseout(function(){$('#dateidtitle').css("Opacity","0");});
+        $('#Statusid').mouseover(function(){ $('#Statusidtitle').css("Opacity","100"); }).mouseout(function(){$('#Statusidtitle').css("Opacity","0");});
+        $('#Urgencyid').mouseover(function(){ $('#Urgencyidtitle').css("Opacity","100"); }).mouseout(function(){$('#Urgencyidtitle').css("Opacity","0");});
+        $('#Requestid').mouseover(function(){ $('#Requestidtitle').css("Opacity","100"); }).mouseout(function(){$('#Requestidtitle').css("Opacity","0");});
+      
+        $('#form-contracor').on('click',function(){
+        
+        
+        });
+        
+        $('#cancelcolsingticket').on('click',function(){            
+        
+            $('#writebeforeclose').val("");
+        });
+
+        $('#notebutton').on('click',function(){
+            $('.sectiontoshoworhide').slideUp();
+        });
+
+        $('body').on('click', ".clicktoshoworhide", function(){
+
+            var key= $(this).attr("data-thisisakey");
+            $('[data-dropdownkey='+key+']').slideToggle();
+        });
+
+        $('#writebeforeclose').on('click',function(){
+        
+            $(this).focus();
+        });
+
+        $('#closingrequest').on("click", function (e) {
+            e.preventDefault();
+
+            //alert($.trim($('#writebeforeclose').length));
+          
+            if ($('#writebeforeclose').val()!="")
+            {
+                window.location.href = window.location.href + "#noselection";
+                //alert('closed');
+                $('#myModal').trigger('click');
+                $('#writebeforeclose').val("");
+            
+            }
+            else{
+                alert("A resolution must be enter before closing this ticket");
+            
+            }
+            return false;
+        });
+        $('#NewContractor a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        });
+
+        $('#textareatechnote').keyup(function () {
+            var maxl = $(this).attr("maxlength") - 1;
+            var input = $(this).val().length;
+
+            var totalused = maxl + 1 - input;
+            if (input != 0) {
+                $('#remainingChar').html('<span style="color:red; font-size:14px;" >'+totalused + '</span>');
+
+            } else {
+                $('#remainingChar').html("");
+            }
+        });
+
+
+
+
+
+
+        var viewModel = function () {
+            // =====year=======
+            function YearC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getFullYear());
+            }
+            // =====Month=======
+            function MonthC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return (dt.getMonth());
+            }
+            // =====Day=======
+            function DayC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getDate();
+
+            }
+
+            // =====Hour=======
+            function HoursC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value); l
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getHours();
+            }
+            // =====Minutes=======
+            function MinutesC(value) {
+                var pattern = /Date\(([^)]+)\)/;
+                var results = pattern.exec(value);
+                var dt = new Date(parseFloat(results[1]));
+                return dt.getMinutes();
+            }
+
+            var self = this;
+
+
+            self.cancelapply = ko.observable(true);
+            self.contractorformclicked = function(){
+                self.cancelapply(false);
+            
+            }
+
+
+
+            self.RROrderByDate= function(){ LoadRequestByDateASC();}
+            self.RRLoadRequestSortStatusASC = function(){ LoadRequestSortStatusASC();};
+            self.RRLoadRequestSortUrgencyASC = function(){LoadRequestSortUrgencyASC();};
+            self.RRLoadRequestSortRequestNumberASC = function(){LoadRequestSortRequestNumberASC();};
+
+
+
+
+
+            self.Searchclosedrequest = ko.observable();
+
+            self.Searchclosedrequest.subscribe(function(datatyped){
+                $.ajax({
+                    type:"GET",
+                    url: "/building/LoadCloseRequestsbaseonsearch/",
+                    datatype: "json",
+                    data:{buildingID: @Model.buildingID, filterRequestNumber:datatyped},
+                    success: function(datareturn){
+                        //debugger;
+                        //alert(JSON.stringify(datareturn));
+                        self.CloseTickets.removeAll();
+                        var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.CloseTickets.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+                            });
+                        }
+                    }
+
+
+                });
+
+            });
+
+            self.Search = ko.observable();
+
+
+            self.Search.subscribe(function(data)
+            {
+                $.ajax({
+                    type:"GET",
+                    url:"/building/SearchbyRequestNumber",
+                    datatype:"json",
+                    data:{filter:data, BuildingID: @Model.buildingID},
+                    success:function(returndata){
+
+
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+
+
+
+                    }
+
+                });
+
+            }
+
+            );
+
+
+            self.CloseTickets = ko.observableArray();
+            self.loadclosedTickets = function () {
+                $.ajax({
+                    type:"GET",
+                    url: "/building/LoadCloseRequests/",
+                    datatype: "json",
+                    data:{buildingID: @Model.buildingID},
+                    success: function(datareturn){
+                        //debugger;
+                        //alert(JSON.stringify(datareturn));
+                        self.CloseTickets.removeAll();
+                        var jsonresult = JSON.stringify(datareturn.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.CloseTickets.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+                            });
+                        }
+                    }
+
+
+                });
+
+            };
+
+            self.ClosingMessage = ko.observable();
+           
+           
+            self.CompleteAssignment = function () {
+
+
+
+                debugger;
+               
+                    if( self.ClosingMessage()!="")
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "/building/CloseRepairTicket/",
+                            datatype: "json",
+                            data: { ID: self.selectedID(), ClosingComments:self.ClosingMessage() },
+                            success: function (returnresult)
+                            {
+
+                                //self.whichone();
+                                AjaxBUaccess = true;
+                                self.isnotevisible(false);
+                                self.LoadComp();
+                                self.displayStaff();
+                                self.ContactName("");
+                                self.ContactLastName("");
+                                self.TechNoteValue("");
+                                self.isvisible(false);
+                                LoadFirst();
+                                self.ClosingMessage("");
+
+                            }
+
+                        });
+                
+                    }
+            
+            
+             
+                
+               
+            };
+
+
+            self.ReopenRepairTicket = function(data){
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+
+                $.ajax({
+                    type:"POST",
+                    url:"/building/ReopenRepairTicket",
+                    datatype:"json",
+                    data:{RepairID:myjson.ID},
+                    success:function(datareturn){
+                        debugger;
+                        self.loadclosedTickets();
+                        LoadFirst();
+
+                    }
+
+
+                });
+            };
+
+
+            LoadFirst();//load first
+            //Tech Note
+            var count = ["1", "2", "3", "4"];
+
+            var CompCat = ["Plumer", "Electric", "Carpentry"];
+
+            self.CompanyCat = ko.observableArray(CompCat);
+
+            self.ClearorNot = ko.observable(false);
+
+            self.NewEmail = ko.observable();
+            self.NewCompanyName = ko.observable();
+            self.NewAddress = ko.observable();
+            self.NewCity = ko.observable();
+            self.NewState = ko.observable();
+            self.NewZipcode = ko.observable();
+            self.NewMainPhone = ko.observable();
+            self.NewPName = ko.observable();
+            self.NewPPhone = ko.observable();
+            self.NewPassword = ko.observable(true);
+            self.NewComments = ko.observable();
+            self.NewCatName = ko.observable();
+
+
+
+            self.staffminimenu = function (data, event) {
+                //alert(  event.currentTarget);
+
+
+
+
+            }
+
+
+
+
+            self.ListStates = ko.observableArray();
+
+            self.DisplayAllContractor = ko.observableArray();
+
+            self.NewEmail.subscribe(function (input) {
+                var result = isValidEmailAddress(input);
+                if (result == true) {
+                    $.ajax(
+                        {
+                            type: "GET",
+                            url: '/building/Searchforusername/',
+                            dataType: "json",
+                            data: { search: input },
+                            success: function (data) {
+
+                                var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+                                //alert(jsonresult);
+                                var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                                for (var i = 0; i < TrkPkgs.length; i++) {
+                                    if (TrkPkgs[i].Email == input) {
+                                        $('#validateemailid').html("<span>This email address is already in used");
+                                    }
+                                }
+                            }
+                        });
+                }
+                else if (input == "") {
+                    $('#validateemailid').html("");
+                }
+                else {
+                    $('#validateemailid').html("<span>invalid Email Address!");
+                }
+                console.log(input + " ");
+            });
+
+            $.ajax({
+                type: "get",
+                url: "/building/LoadContractors/",
+                data: { BuildingID: '@Model.buildingID' },
+                datatype: "json",
+                success: function (returndata) {
+                    self.DisplayAllContractor.removeAll();
+                    var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+                    var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                    for (var i = 0; i < TrkPkgs.length; i++) {
+
+                        self.DisplayAllContractor.push(
+                            {
+                                ID: TrkPkgs[i].ID,
+                                CompanyName: TrkPkgs[i].CompanyName,
+                                Address: TrkPkgs[i].Address,
+                                City: TrkPkgs[i].City,
+                                State: TrkPkgs[i].State,
+                                Zipcode: TrkPkgs[i].Zipcode,
+                                Phone: TrkPkgs[i].Phone,
+                                ContactName: TrkPkgs[i].ContactName,
+                                ContactPhone: TrkPkgs[i].ContactPhone,
+                                Comments: TrkPkgs[i].Comments,
+                                Email: TrkPkgs[i].Email,
+                                SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                Category: TrkPkgs[i].Category,
+                                BuildingID: TrkPkgs[i].BuildingID
+                            });
+                    }
+                }
+
+            });
+
+
+
+            self.LoadComp = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/building/LoadContractors/",
+                    data: { BuildingID: '@Model.buildingID' },
+                    datatype: "json",
+                    success: function (returndata) {
+                        self.DisplayAllContractor.removeAll();
+                        var jsonresult = JSON.stringify(returndata.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            self.DisplayAllContractor.push(
+                                {
+                                    ID: TrkPkgs[i].ID,
+                                    CompanyName: TrkPkgs[i].CompanyName,
+                                    Address: TrkPkgs[i].Address,
+                                    City: TrkPkgs[i].City,
+                                    State: TrkPkgs[i].State,
+                                    Zipcode: TrkPkgs[i].Zipcode,
+                                    Phone: TrkPkgs[i].Phone,
+                                    ContactName: TrkPkgs[i].ContactName,
+                                    ContactPhone: TrkPkgs[i].ContactPhone,
+                                    Comments: TrkPkgs[i].Comments,
+                                    Email: TrkPkgs[i].Email,
+                                    SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                    Category: TrkPkgs[i].Category,
+                                    BuildingID: TrkPkgs[i].BuildingID
+                                });
+                        }
+                    }
+
+                });
+            }
+
+            self.InsertContractor = function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/building/InsertNewContractor/',
+                    data: {
+                        Email: self.NewEmail(),
+                        CName: self.NewCompanyName(),
+                        CAddress: self.NewAddress(),
+                        CCity: self.NewCity(),
+                        CState: self.NewState(),
+                        CZipcode: self.NewZipcode(),
+                        CMainPhone: self.NewMainPhone(),
+                        PName: self.NewPName(),
+                        PPhone: self.NewPPhone(),
+                        SendNewPassword: self.NewPassword(),
+                        Comments: self.NewComments(),
+                        CatName: self.NewCatName(),
+                        BuildingID: '@Model.buildingID'
+                    },
+                    datatype: "json",
+                    success: function (returnData) {
+                        self.DisplayAllContractor.removeAll();
+                        var jsonresult = JSON.stringify(returnData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+                            self.DisplayAllContractor.push(
+                                {
+                                    ID: TrkPkgs[i].ID,
+                                    CompanyName: TrkPkgs[i].CompanyName,
+                                    Address: TrkPkgs[i].Address,
+                                    City: TrkPkgs[i].City,
+                                    State: TrkPkgs[i].State,
+                                    Zipcode: TrkPkgs[i].Zipcode,
+                                    Phone: TrkPkgs[i].Phone,
+                                    ContactName: TrkPkgs[i].ContactName,
+                                    ContactPhone: TrkPkgs[i].ContactPhone,
+                                    Comments: TrkPkgs[i].Comments,
+                                    Email: TrkPkgs[i].Email,
+                                    SendNewPassword: TrkPkgs[i].SendNewPassword,
+                                    Category: TrkPkgs[i].Category,
+                                    BuildingID: TrkPkgs[i].BuildingID
+                                });
+                        }
+                    }
+                }).error(function (errordata) {
+
+                });
+            }
+
+
+
+            self.technotes = ko.observableArray();
+            self.technotetextarea = ko.observable(false);
+            self.TechNoteValue = ko.observable();
+            self.Technotecount = ko.observable();
+            self.AddTechNote = function () {
+
+                self.technotetextarea(true);
+            };
+
+            //self.remainingChar = ko.computed(function () {
+
+            //    return self.TechNoteValue().length;
+            //});
+
+
+            self.CloseTechNote = function () {
+                self.technotetextarea(false);
+                self.TechNoteValue("");
+            };
+
+            //DeleteRepairTechNote
+
+            self.DeleteTechNote = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/building/DeleteRepairTechNote/",
+                    data: { RequestID: self.selectedID() },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
+                        }
+
+                        self.TechNoteValue("");
+                    }
+
+                });
+
+            };
+
+            self.LoadTechNote = function () {
+                $.ajax({
+                    type: "get",
+                    url: "/building/LoadRepairTechNotes/",
+                    data: { RequestID: self.selectedID() },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
+                        }
+
+                        self.TechNoteValue("");
+                    }
+
+                });
+
+
+            }
+
+            self.InsertTechNote = function () {
+                $.ajax({
+                    type: "post",
+                    url: "/building/InsertRepairTechNote/",
+                    data:{    RepairRequestID: self.selectedID(), Notes: self.TechNoteValue () },
+                    datatype: "json",
+                    success: function (returnedData) {
+
+                        self.technotes.removeAll();
+                        var jsonresult = JSON.stringify(returnedData.Data);// Json.stringify make an object into a json string
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        self.Technotecount(TrkPkgs.length);
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.technotes.push({
+                                Notes: TrkPkgs[i].Notes,
+                                CreatedDate: DayC(TrkPkgs[i].CreatedDate) + "/" + MonthC(TrkPkgs[i].CreatedDate) + "/" + YearC(TrkPkgs[i].CreatedDate),
+                                id: TrkPkgs[i].id,
+                                RepairRequestID: TrkPkgs[i].RepairRequestID
+
+                            });
+
+                        }
+
+                        self.TechNoteValue("");
+                        self.CloseTechNote();
+                    }
+
+                })
+
+
+            };
+
+
+
+
+
+
+            //this section belongs to the tabs
+            self.applySBS = ko.observable(false);
+            self.applysc = ko.observable(false);
+
+            //self.AjaxBUaccess = ko.observable(true);
+
+
+            //Building staff info
+            var via = [{ Name: 'Email', value: 'Email' }, { Name: 'Phone', value: 'Phone' }, { Name: 'Messenger', value: 'Messenger' }, { Name: 'Other', value: 'Other' }];
+            self.ViaDropDown = ko.observableArray(via);
+            //self.ViaDropDown = ko.observableArray(via);
+
+            //var TempData = [{ Name: 'Dioscar', LastName: 'Rodriguez', Tel: '3476558974'},
+            //                { Name: 'Juan ', LastName: 'Smith', Tel: '7189548658' }];
+            self.BSArray = ko.observableArray();
+
+            self.holdvalues = ko.observable();
+
+            //alert(JSON.stringify(self.BSArray()));
+            //AssignTo
+            self.AssignTo = ko.observableArray();
+            self.isvisible = ko.observable(false);
+            self.ContactName = ko.observable();
+            self.ContactLastName = ko.observable();
+            self.ViaType = ko.observable("Email");
+
+            self.UpdateAssignID = ko.observable();
+            self.UpdateRequestID = ko.observable()
+            self.UpdateNotes = ko.observable("");
+            //Assign Company
+
+            self.assignCompany = function (data) {
+                self.showhidehandler();
+                self.displayStaff();
+                AjaxBUaccess = true;
+
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+
+                self.UpdateAssignID(myjson.ID)
+
+                self.whichone(false);
+                self.ContactName(myjson.CompanyName);
+                self.DisplayAllContractor.removeAll();
+                self.DisplayAllContractor.push(
+                                {
+                                    ID: myjson.ID,
+                                    CompanyName: myjson.CompanyName,
+                                    Address: myjson.Address,
+                                    City: myjson.City,
+                                    State: myjson.State,
+                                    Zipcode: myjson.Zipcode,
+                                    Phone: myjson.Phone,
+                                    ContactName: myjson.ContactName,
+                                    ContactPhone: myjson.ContactPhone,
+                                    Comments: myjson.Comments,
+                                    Email: myjson.Email,
+                                    SendNewPassword: myjson.SendNewPassword,
+                                    Category: myjson.Category,
+                                    BuildingID: myjson.BuildingID
+                                });
+                self.isvisible(true);
+
+            };
+
+
+
+            self.txtVia = ko.observable();
+            self.ViaEmail = function (via) {
+                self.txtVia(via);
+            };
+
+            self.showhidehandler = function () {
+
+                $('.assignedbox').fadeToggle("slow");
+                self.ClearorNot(true);
+            }
+
+            var AjaxBUaccess = true;
+            self.assigntofunction = function (data) {
+
+                self.showhidehandler();
+                self.LoadComp();
+                var myvalue = ko.toJSON(data);
+                var myjson = JSON.parse(myvalue);
+                self.UpdateAssignID(myjson.UserID)
+                self.whichone(true);
+
+                self.ContactName(myjson.FullName);
+                self.BSArray.removeAll();
+                self.BSArray.push({
+                    FullName: myjson.FullName,
+                    Tel: myjson.Phone,
+                    UserID: myjson.UserID,
+                    BuildingID: myjson.UserID.BuildingID
+                });
+                AjaxBUaccess = false;
+                self.isvisible(true);
+                //alert(JSON.stringify(self.selectedAssignto()));
+
+            };
+
+            self.removelink = function () {
+                //if the below statement is true thenhandler section will hide
+                if (self.ClearorNot() == true)
+                {
+                    self.showhidehandler();
+                    self.ClearorNot(false)
+                }
+                self.ClosingMessage("");
+                //self.whichone();
+                AjaxBUaccess = true;
+                self.isnotevisible(false);
+                self.LoadComp();
+                self.displayStaff();
+                self.ContactName("");
+                self.ContactLastName("");
+                self.TechNoteValue("");
+                self.isvisible(false);
+
+            }
+
+            self.onChange = function (data, event) {
+                var selectedText = event.currentTarget.selectedOptions[0].value;
+                self.ViaType(selectedText);
+                //console.log(selectedText);
+                //alert(JSON.stringify(data));
+            };
+            self.displayStaff = function (data, event) {
+                if (AjaxBUaccess == true) {
+
+                    $.ajax(
+                       {
+                           type: "GET",
+                           url: '/building/BuildingUsersList/',
+                           data: { buildingID: "@Model.buildingID" },
+                           dataType: "json",
+                           success: function (data) {
+                               self.BSArray.removeAll();
+                               var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+
+                               var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+
+
+                               for (var i = 0; i < TrkPkgs.length; i++) {
+                                   self.BSArray.push({
+                                       FullName: TrkPkgs[i].FullName,
+                                       Tel: TrkPkgs[i].Phone,
+                                       UserID: TrkPkgs[i].UserID,
+                                       BuildingID: TrkPkgs[i].UserID.BuildingID
+                                   });
+                               }
+                           }
+                       });
+                };
+            };
+
+            $.ajax(
+                {
+                    type: "GET",
+                    url: '/building/BuildingUsersList/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.BSArray.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+                            self.BSArray.push({
+                                FullName: TrkPkgs[i].FullName,
+                                Tel: TrkPkgs[i].Phone,
+                                UserID: TrkPkgs[i].UserID,
+                                BuildingID: TrkPkgs[i].UserID.BuildingID
+                            });
+                        }
+                    }
+                });
+
+            var items = ([{ Text: "Assign To New", Value: "1" }, { Text: "Assign To Existing", Value: "2" }, { Text: "Close Ticket", Value: "3" }]);
+
+            self.itemsoptions = ko.observableArray(items);
+            self.RepairRequest = ko.observableArray();
+            self.value_changed = ko.observable();
+            self.selectedRequestDate = ko.observable();
+            self.selectedAssignto = ko.observable();
+            self.selectedDescription = ko.observable();
+            self.selectedID = ko.observable();//------needed to update request -----
+            self.selectedStatus = ko.observable();
+            self.selectedRequestNumber = ko.observable();
+            self.selectedCategory = ko.observable();
+            self.selectedCName = ko.observable();
+            self.selectedCEmail = ko.observable();
+            self.selectedCphone = ko.observable();
+            self.selectedPName = ko.observable();
+            self.selectedPEmail = ko.observable();
+            self.selectedPPhone = ko.observable();
+            self.selectedPhotoURL = ko.observable();
+            self.selectedUrgency = ko.observable();
+
+            self.isnotevisible = ko.observable(false);
+
+            self.isnotevisibleclick = function () {
+                self.UpdateNotes("");
+                self.isnotevisible(true);
+
+            };
+
+            self.selectedRequestActivities = function () {
+
+            };
+
+            self.removeNotelink = function () { self.isnotevisible(false); };
+            self.selectedRequest = function (value, event) {
+
+                $.ajax({
+                    type: "GET",
+                    url: "/building/States/",
+                    datatype: "json",
+                    success: function (returndata) {
+                        var mydata = JSON.stringify(returndata.Data);
+                        var data1 = JSON.parse(mydata);
+                        // debugger;
+
+
+                        for (var i = 0; i < data1.length; i++){
+
+                            self.ListStates.push(data1[i].Text);
+                        };
+
+
+
+                    }
+                });
+
+
+                var myvalue = ko.toJSON(value);
+                var myjson = JSON.parse(myvalue);
+                self.selectedRequestDate(myjson.RequestedDate);
+                self.selectedAssignto(myjson.RequestedDate);
+                self.selectedDescription(myjson.Description);
+                self.selectedID(myjson.ID);
+                self.selectedStatus(myjson.Status);
+                self.selectedRequestNumber(myjson.RequestNumber);
+                self.selectedPName(myjson.PName);
+                self.selectedPEmail(myjson.PEmail);
+                self.selectedPPhone(myjson.PPhone);
+                self.selectedUrgency(myjson.Urgency);
+                self.selectedCName(myjson.CName);
+                self.selectedCEmail(myjson.CEmail);
+                self.selectedCphone(myjson.Cphone);
+                self.selectedCategory(myjson.Category);
+
+                self.LoadTechNote();
+                self.CloseTechNote();
+
+                //true = staff || false =  Comapny
+                self.whichone = ko.observable();
+
+                if (myjson.AssignToID != null)
+                {
+                    $.ajax(
+                 {
+                     type: "GET",
+                     url: '/building/LoadingAssignTo/',
+                     data: { UserID: myjson.AssignToID },
+                     dataType: "json",
+                     success: function (data) {
+                         var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                         var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                         for (var i = 0; i < TrkPkgs.length; i++) {
+                             self.buildingUsers.push({
+                                 BuildingUserName: ko.observable("Fullname")
+                             });
+                         }
+                     }
+                 });
+
+                }
+                self.UpdateRequestID(myjson.ID);
+            };
+            //----------------apply updates to save on db--------------------
+            self.ApplyUpdate = function () {
+                self.isnotevisible(false);
+                //  alert(self.UpdateAssignID() + " " + self.selectedID() + " " + self.UpdateNotes())
+
+                $.ajax(
+                   {
+                       type: "POST",
+                       url: '/building/ApplyUpdatesRepairRequest/',
+                       data: { UserID: self.UpdateAssignID(), RepairRequestID: self.selectedID(), Notes: self.UpdateNotes(), whichone: self.whichone() },
+                       dataType: "json",
+                       success: function (data) {
+                           if (self.ClearorNot() == true) {
+                               self.showhidehandler();
+                               self.ClearorNot(false)
+                           }
+                           //self.whichone();
+                           AjaxBUaccess = true;
+                           self.isnotevisible(false);
+                           self.LoadComp();
+                           self.displayStaff();
+                           self.ContactName("");
+                           self.ContactLastName("");
+                           self.TechNoteValue("");
+                           self.isvisible(false);
+                           LoadFirst();
+
+
+
+                           //var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                           //var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                           //for (var i = 0; i < TrkPkgs.length; i++) {
+                           //    self.buildingUsers.push({
+                           //        BuildingUserName: ko.observable("Fullname")
+                           //    });
+                           //}
+                       }
+                   });
+            };
+            //----------------End apply updates to save on db--------------------
+            self.buildingUsers = ko.observableArray();
+            self.ListBuildingUsers = function () {
+                $.ajaxSettings.traditional = true;
+                $.ajax(
+                    {
+                        type: "GET",
+                        url: '/building/BuildingUsersList/',
+                        data: { buildingID: "@Model.buildingID" },
+                        dataType: "json",
+                        success: function (data) {
+                            var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                            var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                            for (var i = 0; i < TrkPkgs.length; i++) {
+                                self.buildingUsers.push({
+                                    BuildingUserName: ko.observable("Fullname")
+                                });
+                            }
+                        }
+                    });
+            };
+            function LoadFirst() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquest/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.ClosingMessage("");
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+
+            function LoadRequestByDateASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortByDateASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+            function LoadRequestSortStatusASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortStatusASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+
+
+
+            function LoadRequestSortUrgencyASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortUrgencyASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+
+
+            function LoadRequestSortRequestNumberASC() {
+                //  alert("I am First");
+                $.ajaxSettings.traditional = true;
+                $.ajax({
+                    type: "GET",
+                    url: '/building/BuildingRepairResquestSortRequestNumberASC/',
+                    data: { buildingID: "@Model.buildingID" },
+                    dataType: "json",
+                    success: function (data) {
+                        self.RepairRequest.removeAll();
+                        var jsonresult = JSON.stringify(data.Data);// Json.stringify make an object into a json string
+
+                        var TrkPkgs = JSON.parse(jsonresult); //JSON.parse makes a json string into a json object example obj.FirstName
+                        for (var i = 0; i < TrkPkgs.length; i++) {
+
+
+                            var RDate = MonthC(TrkPkgs[i].RequestedDate) + "/" + DayC(TrkPkgs[i].RequestedDate) + "/" + YearC(TrkPkgs[i].RequestedDate);
+
+                            self.RepairRequest.push({
+                                RequestedDate: ko.observable(RDate),
+                                Assignto: ko.observableArray(items),
+                                Description: TrkPkgs[i].Description,
+                                ID: TrkPkgs[i].ID,
+                                Status: TrkPkgs[i].Status,
+                                RequestNumber: TrkPkgs[i].RequestNumber,
+                                Category: TrkPkgs[i].Category,
+                                PhotoUrl: TrkPkgs[i].PhotoUrl,
+                                Urgency: TrkPkgs[i].Urgency,
+                                CName: TrkPkgs[i].CName,
+                                CEmail: TrkPkgs[i].CEmail,
+                                CPhone: TrkPkgs[i].CPhone,
+                                PName: TrkPkgs[i].PName,
+                                PEmail: TrkPkgs[i].PEmail,
+                                PPhone: TrkPkgs[i].PPhone,
+                                AssignToID: TrkPkgs[i].AssignToID,
+                                AssignedFullName: ko.observable(TrkPkgs[i].AssignedFullName),
+                                assignContractorID: TrkPkgs[i].assignContractorID,
+                                ContractorFullName: TrkPkgs[i].ContractorFullName
+
+
+                            });
+                        }
+                    }
+                });
+
+            };
+
+                //when a selected value this will get the value related with the element
+                self.value_changed.subscribe(function (value) {
+                    var myvalue = ko.toJSON(value);
+                    var myjson = JSON.parse(myvalue);
+
+
+                    alert(myvalue);
+                });
+
+
+
+            };
+
+            ko.applyBindings(viewModel);
+
+        });
+
+
+
+
+    </script>
+
+
+
+
+}

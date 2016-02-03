@@ -1,0 +1,9 @@
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\Doormandondemand.dll.config
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\Doormandondemand.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\Doormandondemand.pdb
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\EntityFramework.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\EntityFramework.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\obj\Debug\Doormandondemand.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\Doormandondemand\obj\Debug\Doormandondemand.pdb

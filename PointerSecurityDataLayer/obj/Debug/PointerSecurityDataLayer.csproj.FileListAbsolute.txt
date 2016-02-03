@@ -1,0 +1,9 @@
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\PointerSecurityDataLayer.dll.config
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\PointerSecurityDataLayer.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\PointerSecurityDataLayer.pdb
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\EntityFramework.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\EntityFramework.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\obj\Debug\PointerSecurityDataLayer.dll
+C:\Users\diosc_000\Source\Repos\Pointersecurity\SecurityMonitor\PointerSecurityDataLayer\obj\Debug\PointerSecurityDataLayer.pdb

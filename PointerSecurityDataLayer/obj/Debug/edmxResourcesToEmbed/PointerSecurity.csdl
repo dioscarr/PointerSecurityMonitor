@@ -1,0 +1,1056 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PointerSecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PointerdbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ActiveManager" EntityType="PointerSecurityModel.ActiveManager" />
+    <EntitySet Name="Apartment" EntityType="PointerSecurityModel.Apartment" />
+    <EntitySet Name="AspNetRoles" EntityType="PointerSecurityModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="PointerSecurityModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="PointerSecurityModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="PointerSecurityModel.AspNetUsers" />
+    <EntitySet Name="Buildings" EntityType="PointerSecurityModel.Buildings" />
+    <EntitySet Name="BuildingUser" EntityType="PointerSecurityModel.BuildingUser" />
+    <EntitySet Name="BuildingUserMapping" EntityType="PointerSecurityModel.BuildingUserMapping" />
+    <EntitySet Name="C__MigrationHistory" EntityType="PointerSecurityModel.C__MigrationHistory" />
+    <EntitySet Name="Clients" EntityType="PointerSecurityModel.Clients" />
+    <EntitySet Name="GanttLinkId" EntityType="PointerSecurityModel.GanttLinkId" />
+    <EntitySet Name="GanttTask" EntityType="PointerSecurityModel.GanttTask" />
+    <EntitySet Name="ListOfModule" EntityType="PointerSecurityModel.ListOfModule" />
+    <EntitySet Name="Manager" EntityType="PointerSecurityModel.Manager" />
+    <EntitySet Name="ManagerBuilding" EntityType="PointerSecurityModel.ManagerBuilding" />
+    <EntitySet Name="MasterProfileFields" EntityType="PointerSecurityModel.MasterProfileFields" />
+    <EntitySet Name="Module" EntityType="PointerSecurityModel.Module" />
+    <EntitySet Name="PackageDeliveryStatus" EntityType="PointerSecurityModel.PackageDeliveryStatus" />
+    <EntitySet Name="PendingModules" EntityType="PointerSecurityModel.PendingModules" />
+    <EntitySet Name="PermissionMapRole" EntityType="PointerSecurityModel.PermissionMapRole" />
+    <EntitySet Name="ReqType" EntityType="PointerSecurityModel.ReqType" />
+    <EntitySet Name="Requests" EntityType="PointerSecurityModel.Requests" />
+    <EntitySet Name="Role" EntityType="PointerSecurityModel.Role" />
+    <EntitySet Name="Shipment" EntityType="PointerSecurityModel.Shipment" />
+    <EntitySet Name="ShippingCarrier" EntityType="PointerSecurityModel.ShippingCarrier" />
+    <EntitySet Name="ShippingService" EntityType="PointerSecurityModel.ShippingService" />
+    <EntitySet Name="SignalRMessageTable" EntityType="PointerSecurityModel.SignalRMessageTable" />
+    <EntitySet Name="States" EntityType="PointerSecurityModel.States" />
+    <EntitySet Name="sysdiagrams" EntityType="PointerSecurityModel.sysdiagrams" />
+    <EntitySet Name="Tenant" EntityType="PointerSecurityModel.Tenant" />
+    <EntitySet Name="User" EntityType="PointerSecurityModel.User" />
+    <EntitySet Name="UserActivityLog" EntityType="PointerSecurityModel.UserActivityLog" />
+    <AssociationSet Name="FK_ActiveManager_To_Manager" Association="PointerSecurityModel.FK_ActiveManager_To_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="ActiveManager" EntitySet="ActiveManager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActiveManager_ToBuilding" Association="PointerSecurityModel.FK_ActiveManager_ToBuilding">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="ActiveManager" EntitySet="ActiveManager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Apartment_Buildings" Association="PointerSecurityModel.FK_Apartment_Buildings">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="Apartment" EntitySet="Apartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Apartment" Association="PointerSecurityModel.FK_Shipment_Apartment">
+      <End Role="Apartment" EntitySet="Apartment" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenant_Apartment" Association="PointerSecurityModel.FK_Tenant_Apartment">
+      <End Role="Apartment" EntitySet="Apartment" />
+      <End Role="Tenant" EntitySet="Tenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PermissionMapRole_ASPNETRole" Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_AspNetRoles" Association="PointerSecurityModel.FK_Role_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="Role" EntitySet="Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="PointerSecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PointerSecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUserMapping_AspNetUsers1" Association="PointerSecurityModel.FK_BuildingUserMapping_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_AspNetUsers" Association="PointerSecurityModel.FK_Manager_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PermissionMapRole_ASPNETUSERS" Association="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="PermissionMapRole" EntitySet="PermissionMapRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_AspNetUsers" Association="PointerSecurityModel.FK_Role_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Role" EntitySet="Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_AspNETUser" Association="PointerSecurityModel.FK_Shipment_AspNETUser">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenant_AspNetUsers" Association="PointerSecurityModel.FK_Tenant_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Tenant" EntitySet="Tenant" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserActivityLog_AspNetUsers" Association="PointerSecurityModel.FK_UserActivityLog_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserActivityLog" EntitySet="UserActivityLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buildings_Clients" Association="PointerSecurityModel.FK_Buildings_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Buildings" EntitySet="Buildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buildings_Manager" Association="PointerSecurityModel.FK_Buildings_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="Buildings" EntitySet="Buildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buildings_PendingModules" Association="PointerSecurityModel.FK_Buildings_PendingModules">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="PendingModules" EntitySet="PendingModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUSer" Association="PointerSecurityModel.FK_BuildingUSer">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="BuildingUser" EntitySet="BuildingUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUserMapping_Buildings1" Association="PointerSecurityModel.FK_BuildingUserMapping_Buildings1">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="BuildingUserMapping" EntitySet="BuildingUserMapping" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManagerBuilding_Buildings" Association="PointerSecurityModel.FK_ManagerBuilding_Buildings">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_Buildings" Association="PointerSecurityModel.FK_Shipment_Buildings">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="Shipment" EntitySet="Shipment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserActivityLog_Buildings" Association="PointerSecurityModel.FK_UserActivityLog_Buildings">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="UserActivityLog" EntitySet="UserActivityLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Clients" Association="PointerSecurityModel.FK_Manager_Clients">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Manager" EntitySet="Manager" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_Buildings1" Association="PointerSecurityModel.FK_Module_Buildings1">
+      <End Role="ListOfModule" EntitySet="ListOfModule" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Module_Listofmodule" Association="PointerSecurityModel.FK_Module_Listofmodule">
+      <End Role="ListOfModule" EntitySet="ListOfModule" />
+      <End Role="PendingModules" EntitySet="PendingModules" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PendingModuleRequests_Buildings1" Association="PointerSecurityModel.FK_PendingModuleRequests_Buildings1">
+      <End Role="ListOfModule" EntitySet="ListOfModule" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PendingModuleRequests1_Buildings1" Association="PointerSecurityModel.FK_PendingModuleRequests1_Buildings1">
+      <End Role="ListOfModule" EntitySet="ListOfModule" />
+      <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ManagerBuilding_Manager" Association="PointerSecurityModel.FK_ManagerBuilding_Manager">
+      <End Role="Manager" EntitySet="Manager" />
+      <End Role="ManagerBuilding" EntitySet="ManagerBuilding" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Tenant" Association="PointerSecurityModel.FK_Request_Tenant">
+      <End Role="Tenant" EntitySet="Tenant" />
+      <End Role="Requests" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="PointerSecurityModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="Package" EntityType="PointerSecurityModel.Package" />
+    <EntitySet Name="PackageType" EntityType="PointerSecurityModel.PackageType" />
+    <AssociationSet Name="FK_Package_PackageDeliveryStatus" Association="PointerSecurityModel.FK_Package_PackageDeliveryStatus">
+      <End Role="PackageDeliveryStatus" EntitySet="PackageDeliveryStatus" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_PackageType" Association="PointerSecurityModel.FK_Package_PackageType">
+      <End Role="PackageType" EntitySet="PackageType" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_Shipment" Association="PointerSecurityModel.FK_Package_Shipment">
+      <End Role="Shipment" EntitySet="Shipment" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_ShippingCarrier" Association="PointerSecurityModel.FK_Package_ShippingCarrier">
+      <End Role="ShippingCarrier" EntitySet="ShippingCarrier" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_ShippingService" Association="PointerSecurityModel.FK_Package_ShippingService">
+      <End Role="ShippingService" EntitySet="ShippingService" />
+      <End Role="Package" EntitySet="Package" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ActiveManager">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ManagerID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Manager" Relationship="PointerSecurityModel.FK_ActiveManager_To_Manager" FromRole="ActiveManager" ToRole="Manager" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_ActiveManager_ToBuilding" FromRole="ActiveManager" ToRole="Buildings" />
+  </EntityType>
+  <EntityType Name="Apartment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ApartmentNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FloorNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingID" Type="Int32" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Apartment_Buildings" FromRole="Apartment" ToRole="Buildings" />
+    <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_Apartment" FromRole="Apartment" ToRole="Shipment" />
+    <NavigationProperty Name="Tenant" Relationship="PointerSecurityModel.FK_Tenant_Apartment" FromRole="Apartment" ToRole="Tenant" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PermissionMapRole" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" FromRole="AspNetRoles" ToRole="PermissionMapRole" />
+    <NavigationProperty Name="Role" Relationship="PointerSecurityModel.FK_Role_AspNetRoles" FromRole="AspNetRoles" ToRole="Role" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="PointerSecurityModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="PointerSecurityModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="BuildingUserMapping" Relationship="PointerSecurityModel.FK_BuildingUserMapping_AspNetUsers1" FromRole="AspNetUsers" ToRole="BuildingUserMapping" />
+    <NavigationProperty Name="Manager" Relationship="PointerSecurityModel.FK_Manager_AspNetUsers" FromRole="AspNetUsers" ToRole="Manager" />
+    <NavigationProperty Name="PermissionMapRole" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" FromRole="AspNetUsers" ToRole="PermissionMapRole" />
+    <NavigationProperty Name="Role" Relationship="PointerSecurityModel.FK_Role_AspNetUsers" FromRole="AspNetUsers" ToRole="Role" />
+    <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_AspNETUser" FromRole="AspNetUsers" ToRole="Shipment" />
+    <NavigationProperty Name="Tenant" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="AspNetUsers" ToRole="Tenant" />
+    <NavigationProperty Name="UserActivityLog" Relationship="PointerSecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="AspNetUsers" ToRole="UserActivityLog" />
+    <NavigationProperty Name="AspNetRoles" Relationship="PointerSecurityModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="NumberOfApartment" Type="Int32" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="BuildingPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Manager" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ManagersID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ActiveManager" Relationship="PointerSecurityModel.FK_ActiveManager_ToBuilding" FromRole="Buildings" ToRole="ActiveManager" />
+    <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Apartment_Buildings" FromRole="Buildings" ToRole="Apartment" />
+    <NavigationProperty Name="Clients" Relationship="PointerSecurityModel.FK_Buildings_Clients" FromRole="Buildings" ToRole="Clients" />
+    <NavigationProperty Name="Manager1" Relationship="PointerSecurityModel.FK_Buildings_Manager" FromRole="Buildings" ToRole="Manager" />
+    <NavigationProperty Name="PendingModules" Relationship="PointerSecurityModel.FK_Buildings_PendingModules" FromRole="Buildings" ToRole="PendingModules" />
+    <NavigationProperty Name="BuildingUser" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="Buildings" ToRole="BuildingUser" />
+    <NavigationProperty Name="BuildingUserMapping" Relationship="PointerSecurityModel.FK_BuildingUserMapping_Buildings1" FromRole="Buildings" ToRole="BuildingUserMapping" />
+    <NavigationProperty Name="ManagerBuilding" Relationship="PointerSecurityModel.FK_ManagerBuilding_Buildings" FromRole="Buildings" ToRole="ManagerBuilding" />
+    <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Shipment_Buildings" FromRole="Buildings" ToRole="Shipment" />
+    <NavigationProperty Name="UserActivityLog" Relationship="PointerSecurityModel.FK_UserActivityLog_Buildings" FromRole="Buildings" ToRole="UserActivityLog" />
+  </EntityType>
+  <EntityType Name="BuildingUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_BuildingUSer" FromRole="BuildingUser" ToRole="Buildings" />
+  </EntityType>
+  <EntityType Name="BuildingUserMapping">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_BuildingUserMapping_AspNetUsers1" FromRole="BuildingUserMapping" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_BuildingUserMapping_Buildings1" FromRole="BuildingUserMapping" ToRole="Buildings" />
+  </EntityType>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingCount" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Buildings_Clients" FromRole="Clients" ToRole="Buildings" />
+    <NavigationProperty Name="Manager" Relationship="PointerSecurityModel.FK_Manager_Clients" FromRole="Clients" ToRole="Manager" />
+  </EntityType>
+  <EntityType Name="GanttLinkId">
+    <Key>
+      <PropertyRef Name="GantLinkID" />
+    </Key>
+    <Property Name="GantLinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="SourceTaskId" Type="Int32" Nullable="false" />
+    <Property Name="TargerTaskId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GanttTask">
+    <Key>
+      <PropertyRef Name="GantTaskID" />
+    </Key>
+    <Property Name="GantTaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Progress" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ParentID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ListOfModule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModuleName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Module" Relationship="PointerSecurityModel.FK_Module_Buildings1" FromRole="ListOfModule" ToRole="Module" />
+    <NavigationProperty Name="PendingModules" Relationship="PointerSecurityModel.FK_Module_Listofmodule" FromRole="ListOfModule" ToRole="PendingModules" />
+    <NavigationProperty Name="Module1" Relationship="PointerSecurityModel.FK_PendingModuleRequests_Buildings1" FromRole="ListOfModule" ToRole="Module" />
+    <NavigationProperty Name="Module2" Relationship="PointerSecurityModel.FK_PendingModuleRequests1_Buildings1" FromRole="ListOfModule" ToRole="Module" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ClientID" Type="Int32" />
+    <NavigationProperty Name="ActiveManager" Relationship="PointerSecurityModel.FK_ActiveManager_To_Manager" FromRole="Manager" ToRole="ActiveManager" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Manager_AspNetUsers" FromRole="Manager" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Buildings_Manager" FromRole="Manager" ToRole="Buildings" />
+    <NavigationProperty Name="Clients" Relationship="PointerSecurityModel.FK_Manager_Clients" FromRole="Manager" ToRole="Clients" />
+    <NavigationProperty Name="ManagerBuilding" Relationship="PointerSecurityModel.FK_ManagerBuilding_Manager" FromRole="Manager" ToRole="ManagerBuilding" />
+  </EntityType>
+  <EntityType Name="ManagerBuilding">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ManagerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_ManagerBuilding_Buildings" FromRole="ManagerBuilding" ToRole="Buildings" />
+    <NavigationProperty Name="Manager" Relationship="PointerSecurityModel.FK_ManagerBuilding_Manager" FromRole="ManagerBuilding" ToRole="Manager" />
+  </EntityType>
+  <EntityType Name="MasterProfileFields">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Label" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Controller" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Module">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ListOfModuleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ListOfModule" Relationship="PointerSecurityModel.FK_Module_Buildings1" FromRole="Module" ToRole="ListOfModule" />
+    <NavigationProperty Name="ListOfModule1" Relationship="PointerSecurityModel.FK_PendingModuleRequests_Buildings1" FromRole="Module" ToRole="ListOfModule" />
+    <NavigationProperty Name="ListOfModule2" Relationship="PointerSecurityModel.FK_PendingModuleRequests1_Buildings1" FromRole="Module" ToRole="ListOfModule" />
+  </EntityType>
+  <EntityType Name="PackageDeliveryStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_PackageDeliveryStatus" FromRole="PackageDeliveryStatus" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="PendingModules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ListOfModuleID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Buildings_PendingModules" FromRole="PendingModules" ToRole="Buildings" />
+    <NavigationProperty Name="ListOfModule" Relationship="PointerSecurityModel.FK_Module_Listofmodule" FromRole="PendingModules" ToRole="ListOfModule" />
+  </EntityType>
+  <EntityType Name="PermissionMapRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoles" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETRole" FromRole="PermissionMapRole" ToRole="AspNetRoles" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_PermissionMapRole_ASPNETUSERS" FromRole="PermissionMapRole" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="ReqType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReqType1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Requests">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequestType" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="TenantID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tenant" Relationship="PointerSecurityModel.FK_Request_Tenant" FromRole="Requests" ToRole="Tenant" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RoleID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoles" Relationship="PointerSecurityModel.FK_Role_AspNetRoles" FromRole="Role" ToRole="AspNetRoles" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Role_AspNetUsers" FromRole="Role" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="Shipment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="isNewUser" Type="Boolean" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Zipcode" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="ApartmentNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="aptID" Type="Int32" Nullable="false" />
+    <Property Name="BuildingUserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TenantID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notified" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Shipment_Apartment" FromRole="Shipment" ToRole="Apartment" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Shipment_AspNETUser" FromRole="Shipment" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_Shipment_Buildings" FromRole="Shipment" ToRole="Buildings" />
+    <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_Shipment" FromRole="Shipment" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="ShippingCarrier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Services" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_ShippingCarrier" FromRole="ShippingCarrier" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="ShippingService">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Service" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_ShippingService" FromRole="ShippingService" ToRole="Package" />
+  </EntityType>
+  <EntityType Name="SignalRMessageTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tenant">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isTemPWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="aptID" Type="Int32" />
+    <NavigationProperty Name="Apartment" Relationship="PointerSecurityModel.FK_Tenant_Apartment" FromRole="Tenant" ToRole="Apartment" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_Tenant_AspNetUsers" FromRole="Tenant" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Requests" Relationship="PointerSecurityModel.FK_Request_Tenant" FromRole="Tenant" ToRole="Requests" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastActivity" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="isTempPword" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserActivityLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingID" Type="Int32" />
+    <Property Name="FunctionPerformed" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PointerSecurityModel.FK_UserActivityLog_AspNetUsers" FromRole="UserActivityLog" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Buildings" Relationship="PointerSecurityModel.FK_UserActivityLog_Buildings" FromRole="UserActivityLog" ToRole="Buildings" />
+  </EntityType>
+  <Association Name="FK_ActiveManager_To_Manager">
+    <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="1" />
+    <End Type="PointerSecurityModel.ActiveManager" Role="ActiveManager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ActiveManager">
+        <PropertyRef Name="ManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActiveManager_ToBuilding">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.ActiveManager" Role="ActiveManager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ActiveManager">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Apartment_Buildings">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.Apartment" Role="Apartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Apartment">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_Apartment">
+    <End Type="PointerSecurityModel.Apartment" Role="Apartment" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apartment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="aptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenant_Apartment">
+    <End Type="PointerSecurityModel.Apartment" Role="Apartment" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apartment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Tenant">
+        <PropertyRef Name="aptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PermissionMapRole_ASPNETRole">
+    <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+    <End Type="PointerSecurityModel.PermissionMapRole" Role="PermissionMapRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PermissionMapRole">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Role_AspNetRoles">
+    <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Role" Role="Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PointerSecurityModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="PointerSecurityModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUserMapping_AspNetUsers1">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.BuildingUserMapping" Role="BuildingUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BuildingUserMapping">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_AspNetUsers">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PermissionMapRole_ASPNETUSERS">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.PermissionMapRole" Role="PermissionMapRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PermissionMapRole">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Role_AspNetUsers">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Role" Role="Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_AspNETUser">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="BuildingUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenant_AspNetUsers">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tenant">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserActivityLog_AspNetUsers">
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserActivityLog">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buildings_Clients">
+    <End Type="PointerSecurityModel.Clients" Role="Clients" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Buildings">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buildings_Manager">
+    <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Buildings">
+        <PropertyRef Name="ManagersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buildings_PendingModules">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.PendingModules" Role="PendingModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PendingModules">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUSer">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.BuildingUser" Role="BuildingUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BuildingUser">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUserMapping_Buildings1">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.BuildingUserMapping" Role="BuildingUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BuildingUserMapping">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManagerBuilding_Buildings">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.ManagerBuilding" Role="ManagerBuilding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ManagerBuilding">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_Buildings">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserActivityLog_Buildings">
+    <End Type="PointerSecurityModel.Buildings" Role="Buildings" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.UserActivityLog" Role="UserActivityLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserActivityLog">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Clients">
+    <End Type="PointerSecurityModel.Clients" Role="Clients" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Module_Buildings1">
+    <End Type="PointerSecurityModel.ListOfModule" Role="ListOfModule" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Module" Role="Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListOfModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="ListOfModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Module_Listofmodule">
+    <End Type="PointerSecurityModel.ListOfModule" Role="ListOfModule" Multiplicity="1" />
+    <End Type="PointerSecurityModel.PendingModules" Role="PendingModules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListOfModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PendingModules">
+        <PropertyRef Name="ListOfModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PendingModuleRequests_Buildings1">
+    <End Type="PointerSecurityModel.ListOfModule" Role="ListOfModule" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Module" Role="Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListOfModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="ListOfModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PendingModuleRequests1_Buildings1">
+    <End Type="PointerSecurityModel.ListOfModule" Role="ListOfModule" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Module" Role="Module" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListOfModule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Module">
+        <PropertyRef Name="ListOfModuleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ManagerBuilding_Manager">
+    <End Type="PointerSecurityModel.Manager" Role="Manager" Multiplicity="0..1" />
+    <End Type="PointerSecurityModel.ManagerBuilding" Role="ManagerBuilding" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ManagerBuilding">
+        <PropertyRef Name="ManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_Tenant">
+    <End Type="PointerSecurityModel.Tenant" Role="Tenant" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Requests" Role="Requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tenant">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Requests">
+        <PropertyRef Name="TenantID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="PointerSecurityModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="PointerSecurityModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="TrackingNumber" />
+    </Key>
+    <Property Name="TrackingNumber" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingServiceID" Type="Int32" Nullable="false" />
+    <Property Name="ShippingCarrierID" Type="Int32" Nullable="false" />
+    <Property Name="PakageTypeID" Type="Int32" Nullable="false" />
+    <Property Name="ArrivalTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeliverTime" Type="DateTime" Precision="3" />
+    <Property Name="ShipmentID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PackageDeliveryStatusID" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PackageDeliveryStatus" Relationship="PointerSecurityModel.FK_Package_PackageDeliveryStatus" FromRole="Package" ToRole="PackageDeliveryStatus" />
+    <NavigationProperty Name="PackageType" Relationship="PointerSecurityModel.FK_Package_PackageType" FromRole="Package" ToRole="PackageType" />
+    <NavigationProperty Name="Shipment" Relationship="PointerSecurityModel.FK_Package_Shipment" FromRole="Package" ToRole="Shipment" />
+    <NavigationProperty Name="ShippingCarrier" Relationship="PointerSecurityModel.FK_Package_ShippingCarrier" FromRole="Package" ToRole="ShippingCarrier" />
+    <NavigationProperty Name="ShippingService" Relationship="PointerSecurityModel.FK_Package_ShippingService" FromRole="Package" ToRole="ShippingService" />
+  </EntityType>
+  <EntityType Name="PackageType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Package" Relationship="PointerSecurityModel.FK_Package_PackageType" FromRole="PackageType" ToRole="Package" />
+  </EntityType>
+  <Association Name="FK_Package_PackageDeliveryStatus">
+    <End Type="PointerSecurityModel.PackageDeliveryStatus" Role="PackageDeliveryStatus" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageDeliveryStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="PackageDeliveryStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_PackageType">
+    <End Type="PointerSecurityModel.PackageType" Role="PackageType" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PackageType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="PakageTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_Shipment">
+    <End Type="PointerSecurityModel.Shipment" Role="Shipment" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Shipment">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="ShipmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_ShippingCarrier">
+    <End Type="PointerSecurityModel.ShippingCarrier" Role="ShippingCarrier" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShippingCarrier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="ShippingCarrierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_ShippingService">
+    <End Type="PointerSecurityModel.ShippingService" Role="ShippingService" Multiplicity="1" />
+    <End Type="PointerSecurityModel.Package" Role="Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShippingService">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="ShippingServiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
